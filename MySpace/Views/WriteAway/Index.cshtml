@@ -1,0 +1,91 @@
+﻿@model MySpace.Entities.ViewModel.MyDayViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="container text-center">
+    <h1 class="display-4" id="id_local_date"></h1>
+</div>
+
+<div @*class="container-fluid p-3 bg-dark text-white"*@ class="summernote-container">
+    <form action="@Url.Action("Index","WriteAway")" method="post" id="form">
+        <div class="form-group">
+            <textarea asp-for="WrittenData" class="form-control" placeholder="Write something here..."></textarea>
+        </div>
+        @*<div id="WrittenData"><p>Hello Summernote</p></div>*@
+        <input type="hidden" asp-for="TimeDifferenceInMinutes" value="" />
+        @Html.HiddenFor(m => m.id)
+        <div class="text-center">
+            <button class="btn btn-success" type="submit">
+                Save
+            </button>
+        </div>
+
+
+    </form>
+    @*<div class="card">
+        <form action="@Url.Action("Index","WriteAway")" method="post" id="form">
+            <div class="card-body">
+                <div class="form-group">
+                    <textarea asp-for="WrittenData" class="form-control" placeholder="Write something here..."></textarea>
+                </div>
+                <div id="summernote">
+
+                </div>
+                <input type="hidden" asp-for="TimeDifferenceInMinutes" value="" />
+            </div>
+            @Html.HiddenFor(m => m.id)
+            <div class="card-footer text-center">
+                <button class="btn btn-success" type="submit">
+                    Save
+                </button>
+            </div>
+
+
+        </form>
+    </div>*@
+
+
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+
+
+            const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            let monthName = month[date.getMonth()];
+
+            document.getElementById('id_local_date').innerHTML = date.getDate() + ' ' + monthName + ', ' + date.getFullYear();
+            document.getElementById('TimeDifferenceInMinutes').value = diff;
+            var writtenData = '@Model.WrittenData';
+            if (writtenData == null || writtenData == '') {
+                $.ajax({
+                    type: "GET",
+                    url: "/WriteAway/GetCurrentDayData",
+                    data: { 'timeDifference': diff },
+                    success: function (data) {
+                        if (data != null) {
+                            console.log(data);
+                            document.getElementById('WrittenData').value = data.writtenData;
+                            document.getElementById('id').value = data.id;
+                        }
+                    }
+                });
+            }
+
+
+            //render summernote rich text editor
+            debugger;
+
+            $('#WrittenData').summernote({
+                placeholder: 'Write Away...',
+                tabsize: 2,
+                height: 100
+            });
+        });
+    </script>
+}
+
