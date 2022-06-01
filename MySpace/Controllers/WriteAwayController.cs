@@ -60,7 +60,7 @@ namespace MySpace.Controllers
 
 
             }
-            catch (Exception ex)
+            catch (Exception exe)
             {
                 throw;
             }
