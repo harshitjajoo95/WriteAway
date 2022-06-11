@@ -17,13 +17,24 @@ namespace MySpace
         {
             this.context = context;
         }
-        public MyDayViewModel GetCurrentDayData(int timeDifference)
+        //public MyDayViewModel GetCurrentDayData(int timeDifference)
+        //{
+        //    DateTime currentLocalDate = DateTime.UtcNow.AddMinutes(-timeDifference);
+        //    MyDayViewModel model = context.Days.Where(x => x.LocalDateTime.Date == currentLocalDate.Date)?.FirstOrDefault();
+        //    return model;
+        //}
+
+        /// <summary>
+        /// Get user's data by its local date
+        /// </summary>
+        /// <param name="timeDifference"></param>
+        /// <returns></returns>
+        public MyDayViewModel GetUsersLocalDayData(int timeDifference)
         {
             DateTime currentLocalDate = DateTime.UtcNow.AddMinutes(-timeDifference);
             MyDayViewModel model = context.Days.Where(x => x.LocalDateTime.Date == currentLocalDate.Date)?.FirstOrDefault();
             return model;
         }
-
         public MyDayViewModel GetDayDataById(int id)
         {
             MyDayViewModel model = context.Days.Where(x => x.id == id)?.FirstOrDefault();

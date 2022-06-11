@@ -6,7 +6,8 @@ namespace MySpace
 {
     public interface IMyDayRepository
     {
-        MyDayViewModel GetCurrentDayData(int timeDifference);
+        //MyDayViewModel GetCurrentDayData(int timeDifference);
+        MyDayViewModel GetUsersLocalDayData(int timeDifference);
         IEnumerable<MyDayViewModel> GetAllDaysData();
         MyDayViewModel AddDayData(MyDayViewModel model);
 

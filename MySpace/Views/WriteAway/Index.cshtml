@@ -64,7 +64,7 @@
             if (writtenData == null || writtenData == '') {
                 $.ajax({
                     type: "GET",
-                    url: "/WriteAway/GetCurrentDayData",
+                    url: "/WriteAway/GetUsersLocalDayData",//GetCurrentDayData
                     data: { 'timeDifference': diff },
                     success: function (data) {
                         if (data != null) {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.OData.Edm;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,5 +17,8 @@ namespace MySpace.Entities.Data
         public DateTime LocalDateTime { get; set; }
         //public Date LocalDate { get; set; }
         public int TimeDifferenceInMinutes { get; set; }//time difference between local time and utc time
+
+        [NotMapped]
+        public string EncryptedWrittenData { get; set; }
     }
 }
